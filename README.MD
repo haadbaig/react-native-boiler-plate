@@ -4,3 +4,9 @@ How to RUN project locally?
 - Download and install **Expo Go** app in iOS and andoid device. 
 - For iOS, Open camera, and scan the QR code and click on the pop up tooltip
 - For Andoid, Open application and press on the option of Scan QR code.
+
+
+How to change splash screen?
+
+- Add new .png image in /assets folder.
+- Open app.json and paste the image location url in **icon** perperty 
