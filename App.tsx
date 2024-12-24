@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MainNavigator from './src/navigation/MainNavigator';
 import * as SplashScreen from 'expo-splash-screen';
@@ -21,9 +21,9 @@ export default function App() {
     const prepareApp = async () => {
       try {
         // Load any required resources or perform tasks here
-        // await setTimeout(() => {
-        //   console.log("LOGGER---------")
-        // }, 1000)
+        await setTimeout(() => {
+          console.log("LOGGER---------")
+        }, 5000)
         // Simulate a task (e.g., API call)
         await new Promise((resolve) => setTimeout(resolve, 5000));
       } catch (error) {
@@ -34,25 +34,28 @@ export default function App() {
     };
 
     prepareApp();
+    SplashScreen.hideAsync();
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      // Hide the splash screen once the app is ready
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (appIsReady) {
+  //     // Hide the splash screen once the app is ready
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [appIsReady]);
 
   if (!appIsReady) {
+    // Render the custom splash screenr
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View style={styles.splashContainer}>
+        <Text style={styles.splashText}>Welcome to T Stop PRO</Text>
+        <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
       </View>
     );
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <NavigationContainer>
         <MainNavigator />
       </NavigationContainer>
@@ -61,14 +64,22 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  splashContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff', // Match the background color from app.json
+  },
+  splashText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  loader: {
+    marginTop: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  }
 });
