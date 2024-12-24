@@ -34,14 +34,18 @@ export default function App() {
   if (!appIsReady) {
     // Render the custom splash screenr
     return (
-      <View className="flex-1 flex flex-col justify-center items-center bg-slate">
+      <View className="flex-1 flex flex-col justify-center items-center bg-white">
         <Image
           source={require('./assets/projector-gif-splash.gif')}
-          className="flex-1 flex justify-center items-center w-96 h-96"
+          style={{
+            width: 200,
+            height: 200
+          }}
+          className="flex-1 flex justify-center items-center"
           contentFit="contain"
         />
-        <Text>Welcome to T Stop Pro</Text>
-        {/* <ActivityIndicator size="large" color="#0000ff" /> */}
+        <Text className="text-lg font-bold mt-5">Welcome</Text>
+        {/* <ActivityIndicator size="large" color="#000f" /> */}
       </View>
     );
   }
